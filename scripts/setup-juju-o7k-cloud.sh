@@ -7,6 +7,78 @@ OS_DOMAIN_NAME=$4
 OS_TENANT_NAME=$5
 OS_USERNAME=$6
 
+
+cat <<END > ./micro-ck8s.yaml
+series: jammy
+applications:
+  easyrsa:
+    charm: easyrsa
+    channel: stable
+    num_units: 1
+    to:
+    - "0"
+    constraints: arch=amd64
+  etcd:
+    charm: etcd
+    channel: stable
+    num_units: 1
+    to:
+    - "0"
+    constraints: arch=amd64
+  kubernetes-control-plane:
+    charm: kubernetes-control-plane
+    channel: 1.28/stable
+    num_units: 2
+    options:
+      allow-privileged: "true"
+    to:
+    - "0"
+    - "1"
+    constraints: arch=amd64
+  calico:
+    charm: calico
+    channel: stable
+  containerd:
+    charm: containerd
+    channel: stable
+  kubernetes-worker:
+    charm: kubernetes-worker
+    channel: 1.28/stable
+    num_units: 1
+    to:
+    - "2"
+    constraints: arch=amd64
+machines:
+  "0":
+    constraints: tags=k8s-dp
+  "1":
+    constraints: tags=k8s-dp
+  "2":
+    constraints: tags=k8s-dp
+relations:
+- - easyrsa:client
+  - etcd:certificates
+- - easyrsa:client
+  - kubernetes-control-plane:certificates
+- - easyrsa:client
+  - kubernetes-worker:certificates
+- - etcd:db
+  - kubernetes-control-plane:etcd
+- - kubernetes-control-plane:kube-control
+  - kubernetes-worker:kube-control
+- - calico
+  - kubernetes-control-plane
+- - calico
+  - etcd
+- - calico
+  - kubernetes-worker
+- - containerd
+  - kubernetes-control-plane
+- - containerd
+  - kubernetes-worker
+
+END
+
 cat <<END > ./openstack-cloud.yaml
 clouds:
   openstack_cloud:
@@ -18,6 +90,7 @@ clouds:
     ca-certificates:
     - |
       `cat $O7K_CA_CERT`
+    
 END
 
 cat <<END > ./openstack-credential.yaml

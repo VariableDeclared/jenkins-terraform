@@ -17,7 +17,7 @@ clouds:
         endpoint: $O7K_KEYSTONE_URL
     ca-certificates:
     - |
-      $O7K_CA_CERT
+      `cat $O7K_CA_CERT`
 END
 
 cat <<END > ./openstack-credential.yaml

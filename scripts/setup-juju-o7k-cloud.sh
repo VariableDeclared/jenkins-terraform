@@ -50,11 +50,11 @@ applications:
     constraints: arch=amd64
 machines:
   "0":
-    constraints: tags=k8s-dp
+    constraints: cores=2 mem=4G root-disk=20G
   "1":
-    constraints: tags=k8s-dp
+    constraints: cores=2 mem=4G root-disk=20G
   "2":
-    constraints: tags=k8s-dp
+    constraints: cores=2 mem=4G root-disk=20G
 relations:
 - - easyrsa:client
   - etcd:certificates

@@ -32,5 +32,5 @@ credentials:
      username: $OS_USERNAME
 END
 
-juju add-cloud -f openstack-cloud.yaml
-juju add-credential -f openstack-credential.yaml
+juju add-cloud --client -f openstack-cloud.yaml
+juju add-credential --client -f openstack-credential.yaml

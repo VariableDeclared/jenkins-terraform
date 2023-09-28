@@ -23,7 +23,7 @@ O7K_CLOUD_CONFIG = {
 
 parser = argparse.ArgumentParser()
 parser.add_argument("ca", help="path to the Openstack CA certificate")
-parser.add_argument("keystone-url", help="keystone URL")
+parser.add_argument("keystone_url", help="keystone URL")
 parser.add_argument("--dest", default="openstack-cloud.yaml", required=False)
 
 def render_configs(args):
@@ -34,12 +34,12 @@ def render_configs(args):
     with open(args.ca, 'r') as fh:
         ca_cert_content = fh.read()
 
-    O7K_CLOUD_CONFIG["clouds"]["openstack_cloud"]["ca-certificates"] = ca_cert_content
+    O7K_CLOUD_CONFIG["clouds"]["openstack_cloud"]["ca-certificates"] = [ca_cert_content]
     
     with open(args.dest, 'w') as fh:
         fh.write(yaml.safe_dump(O7K_CLOUD_CONFIG))
 
-    print("Rendered credential config")
+    print("Rendered cloud config")
 
 if __name__ == "__main__":
     args = parser.parse_args()

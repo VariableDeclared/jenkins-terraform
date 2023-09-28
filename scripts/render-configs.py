@@ -2,6 +2,7 @@
 import argparse
 import yaml
 
+
 O7K_CLOUD_CONFIG = {
     "clouds": {
         "openstack_cloud": {
@@ -21,9 +22,9 @@ O7K_CLOUD_CONFIG = {
 }
 
 parser = argparse.ArgumentParser()
-parser.add_argument("ca", help="path to the Openstack CA certificate", required=True)
-parser.add_argument("keystone-url", dest="keystone_url", help="keystone URL", required=True)
-parser.add_argument("dest", required=False, default="openstack-cloud.yaml")
+parser.add_argument("ca", help="path to the Openstack CA certificate")
+parser.add_argument("keystone-url", help="keystone URL")
+parser.add_argument("--dest", default="openstack-cloud.yaml", required=False)
 
 def render_configs(args):
     O7K_CLOUD_CONFIG["clouds"]["openstack_cloud"]["regions"]["RegionOne"].update({
@@ -41,5 +42,5 @@ def render_configs(args):
     print("Rendered credential config")
 
 if __name__ == "__main__":
-    args = parser.parse_arguments()
+    args = parser.parse_args()
     render_configs(args)

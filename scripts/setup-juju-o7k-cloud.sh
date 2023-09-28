@@ -93,7 +93,7 @@ clouds:
     
 END
 
-./render-configs.py --ca $O7K_CA_CERT --keystone-url $O7K_KEYSTONE_URL
+./render-configs.py $O7K_CA_CERT $O7K_KEYSTONE_URL
 
 juju add-cloud --client -f openstack-cloud.yaml || true
 juju add-credential openstack_cloud --client -f openstack-credential.yaml || true

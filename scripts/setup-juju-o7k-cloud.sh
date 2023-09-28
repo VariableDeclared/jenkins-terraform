@@ -93,18 +93,7 @@ clouds:
     
 END
 
-cat <<END > ./openstack-credential.yaml
-credentials:
-   openstack_cloud:
-      alice-credential:
-        auth-type: userpass
-        domain-name: ""
-        password: "$OS_PASSWD"
-        project-domain-name: "$OS_DOMAIN_NAME"
-        tenant-name: "$OS_TENANT_NAME"
-        user-domain-name: "$OS_DOMAIN_NAME"
-        username: "$OS_USERNAME"
-END
+./render-configs.py --ca $O7K_CA_CERT --keystone-url $O7K_KEYSTONE_URL
 
 juju add-cloud --client -f openstack-cloud.yaml || true
 juju add-credential openstack_cloud --client -f openstack-credential.yaml || true

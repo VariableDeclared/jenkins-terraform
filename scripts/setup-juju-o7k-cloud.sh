@@ -33,4 +33,4 @@ credentials:
 END
 
 juju add-cloud --client -f openstack-cloud.yaml
-juju add-credential --client -f openstack-credential.yaml
+juju add-credential openstack_cloud --client -f openstack-credential.yaml

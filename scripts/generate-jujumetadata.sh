@@ -8,5 +8,5 @@
 mkdir -p ~/simplestreams/images
 . $1
 
-juju generate-image -d -i $2 -s $3 -r $4 -u $5 
+juju metadata generate-image -d ~/simplestreams -i $2 -s $3 -r $4 -u $5 
 

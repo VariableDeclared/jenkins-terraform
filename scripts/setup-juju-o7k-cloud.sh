@@ -25,11 +25,11 @@ credentials:
    openstack_cloud:
      auth-type: userpass
      domain-name: ""
-     password: $OS_PASSWD
-     project-domain-name: $OS_DOMAIN_NAME
-     tenant-name: $OS_TENANT_NAME
-     user-domain-name: $OS_DOMAIN_NAME
-     username: $OS_USERNAME
+     password: "$OS_PASSWD"
+     project-domain-name: "$OS_DOMAIN_NAME"
+     tenant-name: "$OS_TENANT_NAME"
+     user-domain-name: "$OS_DOMAIN_NAME"
+     username: "$OS_USERNAME"
 END
 
 juju add-cloud --client -f openstack-cloud.yaml || true

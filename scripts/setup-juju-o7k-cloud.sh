@@ -28,12 +28,11 @@ applications:
   kubernetes-control-plane:
     charm: kubernetes-control-plane
     channel: 1.28/stable
-    num_units: 2
+    num_units: 1
     options:
       allow-privileged: "true"
     to:
     - "0"
-    - "1"
     constraints: arch=amd64
   calico:
     charm: calico
@@ -44,8 +43,9 @@ applications:
   kubernetes-worker:
     charm: kubernetes-worker
     channel: 1.28/stable
-    num_units: 1
+    num_units: 2
     to:
+    - "1"
     - "2"
     constraints: arch=amd64
 machines:

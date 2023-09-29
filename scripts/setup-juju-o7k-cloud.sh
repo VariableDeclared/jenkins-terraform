@@ -79,18 +79,17 @@ relations:
 
 END
 
-cat <<END > ./openstack-cloud.yaml
-clouds:
-  openstack_cloud:
-    type: openstack
-    auth-types: [access-key, userpass]
-    regions:
-      RegionOne:
-        endpoint: $O7K_KEYSTONE_URL
-    ca-certificates:
-    - |
-      `cat $O7K_CA_CERT`
-    
+cat <<END > ./openstack-credential.yaml
+credentials:
+   openstack_cloud:
+      alice-credential:
+        auth-type: userpass
+        domain-name: ""
+        password: "$OS_PASSWD"
+        project-domain-name: "$OS_DOMAIN_NAME"
+        tenant-name: "$OS_TENANT_NAME"
+        user-domain-name: "$OS_DOMAIN_NAME"
+        username: "$OS_USERNAME"
 END
 
 ./render-configs.py $O7K_CA_CERT $O7K_KEYSTONE_URL

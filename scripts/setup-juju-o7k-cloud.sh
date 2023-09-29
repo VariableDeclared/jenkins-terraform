@@ -50,11 +50,14 @@ applications:
     constraints: arch=amd64
 machines:
   "0":
-    constraints: cores=2 mem=4G root-disk=20G
+    constraints: cores=2 mem=4G root-disk=20G root-disk-source=volume allocate-public-ip=true
+    # machine: availability-zone=az-3
   "1":
-    constraints: cores=2 mem=4G root-disk=20G
+    constraints: cores=2 mem=4G root-disk=20G root-disk-source=volume allocate-public-ip=true
+    # machine: availability-zone=az-2
   "2":
-    constraints: cores=2 mem=4G root-disk=20G
+    constraints: cores=2 mem=4G root-disk=20G root-disk-source=volume allocate-public-ip=true
+    # machine: availability-zone=az-1
 relations:
 - - easyrsa:client
   - etcd:certificates

@@ -130,7 +130,20 @@ resource "openstack_identity_project_v3" "development-project" {
   domain_id   = openstack_identity_project_v3.engineering-domain.id
 }
 
+# Setup juju quotas
 
+resource "openstack_networking_quota_v2" "development-project-quota" {
+  project_id          = openstack_identity_project_v3.development-project.id
+  floatingip          = 10
+  network             = 4
+  port                = 100
+  rbac_policy         = 10
+  router              = 4
+  security_group      = 200
+  security_group_rule = 300
+  subnet              = 8
+  subnetpool          = 2
+}
 
 
 # Users
